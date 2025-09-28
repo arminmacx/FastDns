@@ -1,0 +1,38 @@
+# Listener configuration
+listen_ip: "0.0.0.0"
+listen_port: 53 # Use a non-standard port for testing
+
+# Database path
+db_path: "cache.db"
+
+# Cache TTL settings (in seconds)
+cache_ttl_seconds: 1800      # 30 minutes positive cache
+negative_ttl_seconds: 100   # 1 minute negative cache
+
+# Request DNSSEC records (DO bit) from upstreams
+dnssec_enabled: false
+
+# --- Database Background Refresh Interval ---
+# How often to run the full background database refresh cycle.
+# Uses Go's time.ParseDuration format (e.g., "30s", "5m", "1h30m").
+# Must be a positive duration. Default is "1m" (1 minute) if omitted.
+db_refresh_interval: "5m" # Example: Refresh every 5 minutes
+
+# Upstream DNS servers
+upstreams:
+  - name: "Cloudflare"
+    address: "1.1.1.1:53"
+    type: "udp"
+  - name: "Cloudflare"
+    address: "1.0.0.1:53"
+    type: "udp"
+  - name: "isp"
+    address: "172.20.11.11:53"
+    type: "udp"
+  # Add more upstreams (TCP, DoT, DoH if implemented)
+
+# Optional: Blocklists
+# blocklists:
+#   - name: "StevenBlack"
+#     url: "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+
